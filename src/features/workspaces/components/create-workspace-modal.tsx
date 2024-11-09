@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 import {
   Dialog,
@@ -12,6 +13,7 @@ import { useCreateWorkspaceModal } from "../store/use-create-workspace-modal";
 import { useCreateWorkspace } from "../api/use-create-workspace";
 
 export const CreateWorkspaceModal = () => {
+  const router = useRouter();
   const [open, setOpen] = useCreateWorkspaceModal();
   const [name, setName] = useState("");
 
@@ -19,6 +21,7 @@ export const CreateWorkspaceModal = () => {
 
   const handleClose = () => {
     setOpen(false);
+    setName("");
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -27,8 +30,9 @@ export const CreateWorkspaceModal = () => {
     mutate(
       { name },
       {
-        onSuccess(data) {
-          console.log(data);
+        onSuccess(id) {
+          router.push(`/workspace/${id}`);
+          handleClose();
         },
       },
     );
