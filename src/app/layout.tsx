@@ -6,6 +6,7 @@ import localFont from "next/font/local";
 import { ConvexClientProvider } from "@/components/convex-client-provider";
 import "./globals.css";
 import { Modals } from "@/components/modals";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -36,6 +37,7 @@ export default function RootLayout({
         >
           {" "}
           <ConvexClientProvider>
+            <Toaster />
             <Modals />
             {children}
           </ConvexClientProvider>
