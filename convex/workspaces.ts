@@ -24,7 +24,7 @@ export const create = mutation({
 
     const workspace = await ctx.db.get(workspaceId);
 
-    return workspaceId;
+    return workspace;
   },
 });
 

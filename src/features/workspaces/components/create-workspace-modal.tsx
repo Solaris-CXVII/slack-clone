@@ -9,12 +9,28 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useCreateWorkspaceModal } from "../store/use-create-workspace-modal";
+import { useCreateWorkspace } from "../api/use-create-workspace";
 
 export const CreateWorkspaceModal = () => {
   const [open, setOpen] = useCreateWorkspaceModal();
 
+  const { mutate } = useCreateWorkspace();
+
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleSubmit = () => {
+    mutate(
+      {
+        name: "Workspace 1",
+      },
+      {
+        onSuccess(data) {
+          router.push("/workspaces/${data}");
+        },
+      },
+    );
   };
 
   return (
