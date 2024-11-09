@@ -5,11 +5,11 @@ import { api } from "../../../../convex/_generated/api";
 import { Doc, Id } from "../../../../convex/_generated/dataModel";
 
 type RequestType = { name: string };
-type ResponseType = Doc<"workspaces">;
+type ResponseType = Id<"workspaces">;
 
 type Options = {
   onSuccess?: (data: ResponseType) => void;
-  onError?: () => void;
+  onError?: (error: Error) => void;
   onSettled?: () => void;
 };
 
@@ -22,7 +22,7 @@ export const useCreateWorkspace = () => {
         const response = await mutation(values);
         options?.onSuccess?.(response);
       } catch {
-        options?.onError?.();
+        options?.onError?.(error as Error);
       } finally {
         options?.onSettled?.();
       }

@@ -20,15 +20,13 @@ export const CreateWorkspaceModal = () => {
     setOpen(false);
   };
 
-  const handleSubmit = () => {
-    mutate(
+  const handleSubmit = async () => {
+    const data = await mutate(
       {
         name: "Workspace 1",
       },
       {
-        onSuccess(data) {
-          router.push("/workspaces/${data}");
-        },
+        onSuccess(data) { },
       },
     );
   };
