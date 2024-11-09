@@ -8,7 +8,7 @@ export const create = mutation({
     name: v.string(),
   },
   handler: async (ctx, args) => {
-    const userId = await auth.getUserId;
+    const userId = await auth.getUserId(ctx);
 
     if (!userId) {
       throw new Error("Unauthorized");
