@@ -11,7 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Loader } from "lucide-react";
+import { Loader, Plus } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export const WorkspaceSwitcher = () => {
@@ -48,6 +48,22 @@ export const WorkspaceSwitcher = () => {
         >
           {workspace?.name}
           <span className="text-xs txt-muted-foreground">Active workspace</span>
+        </DropdownMenuItem>
+        {filteredWorkspaces?.map((workspace) => (
+          <DropdownMenuItem
+            key={workspace._id}
+            className="cursor-pointer capitalize"
+            onClick={() => router.push(`/workspace/${workspace._id}`)}
+          ></DropdownMenuItem>
+        ))}
+        <DropdownMenuItem
+          className="cursor-pointer"
+          onClick={() => setOpen(true)}
+        >
+          <div className="size-9 relative overflow-hidden bg-[#F2F2F2] text-slate-800 font-semibold text-lg rounded-md flex items-center justify-center mr-2">
+            <Plus />
+          </div>
+          Create a new workspace
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
