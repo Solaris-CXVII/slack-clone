@@ -96,7 +96,7 @@ export const getById = query({
   },
 });
 
-export const upate = mutation({
+export const update = mutation({
   args: {
     id: v.id("workspaces"),
     name: v.string(),
@@ -121,5 +121,7 @@ export const upate = mutation({
     await ctx.db.patch(args.id, {
       name: args.name,
     });
+
+    return args.id;
   },
 });
