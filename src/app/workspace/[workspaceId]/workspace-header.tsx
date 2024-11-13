@@ -47,11 +47,6 @@ export const WorkspaceHeader = ({
             </div>
           </DropdownMenuItem>
           {isAdmin && (
-            //
-            //
-            // Come back to this to fix this shit
-            //
-            //
             <>
               <DropdownMenuSeparator />
               <DropdownMenuItem
@@ -68,13 +63,6 @@ export const WorkspaceHeader = ({
               </DropdownMenuItem>
             </>
           )}
-          <DropdownMenuSeparator />
-          <DropdownMenuItem className="cursor-pointer py-2" onClick={() => { }}>
-            Invite people to {workspace.name}
-          </DropdownMenuItem>
-          <DropdownMenuItem className="cursor-pointer py-2" onClick={() => { }}>
-            Preferences
-          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
 
