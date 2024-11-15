@@ -42,7 +42,7 @@ export const PreferencesModal = ({
   const { mutate: removeWorkspace, isPending: isRemovingWorkspace } =
     useRemoveWorkspace();
 
-  const handleRemove = () => {
+  const handleRemove = async () => {
     removeWorkspace(
       {
         id: workspaceId,
@@ -110,7 +110,7 @@ export const PreferencesModal = ({
                     autoFocus
                     minLength={3}
                     maxLength={80}
-                    placeHolder="Workspace name e.g. 'Work', 'Personal', 'Home'"
+                    placeholder="Workspace name e.g. 'Work', 'Personal', 'Home'"
                   />
                   <DialogFooter>
                     <DialogClose asChild>
