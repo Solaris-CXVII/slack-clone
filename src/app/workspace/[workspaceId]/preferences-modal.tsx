@@ -15,6 +15,8 @@ import {
 import { TrashIcon } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useWorkspaceId } from "@/hooks/use-workspace-id";
+import { toast } from "sonner";
 
 interface PreferencesModalProps {
   open: boolean;
@@ -27,6 +29,8 @@ export const PreferencesModal = ({
   setOpen,
   initialValue,
 }: PreferencesModalProps) => {
+  const workspaceId = useWorkspaceId();
+
   const [value, setValue] = useState(initialValue);
   const [editOpen, setEditOpen] = useState(false);
 
@@ -34,6 +38,25 @@ export const PreferencesModal = ({
     useUpdateWorkspace();
   const { mutate: removeWorkspace, isPending: isRemovingWorkspace } =
     useRemoveWorkspace();
+  const handleEdit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    updateWorkspace(
+      {
+        id: workspaceId,
+        name: value,
+      },
+
+      {
+        onSuccess: () => {
+          toast.success("Workspace updated");
+          setEditOpen(false);
+        },
+        onError: () => {
+          toast.error("Failed to update workspace");
+        },
+      },
+    );
+  };
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -57,7 +80,7 @@ export const PreferencesModal = ({
             <DialogContent>
               <DialogHeader>
                 <DialogTitle>Rename Workspace</DialogTitle>
-                <form className="space-y-4" onSubmit={() => { }}>
+                <form className="space-y-4" onSubmit={handleEdit}>
                   <Input
                     value={value}
                     disabled={isUpdatingWorkspace}
