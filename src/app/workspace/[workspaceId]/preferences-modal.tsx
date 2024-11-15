@@ -3,6 +3,12 @@ import { useState } from "react";
 import { useUpdateWorkspace } from "@/features/workspaces/api/use-update-workspace";
 import { useRemoveWorkspace } from "@/features/workspaces/api/use-remove-workspace";
 
+import { TrashIcon } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { useWorkspaceId } from "@/hooks/use-workspace-id";
+import { toast } from "sonner";
+
 import {
   Dialog,
   DialogContent,
@@ -12,11 +18,6 @@ import {
   DialogClose,
   DialogFooter,
 } from "@/components/ui/dialog";
-import { TrashIcon } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { useWorkspaceId } from "@/hooks/use-workspace-id";
-import { toast } from "sonner";
 
 interface PreferencesModalProps {
   open: boolean;
@@ -38,6 +39,24 @@ export const PreferencesModal = ({
     useUpdateWorkspace();
   const { mutate: removeWorkspace, isPending: isRemovingWorkspace } =
     useRemoveWorkspace();
+
+  const handleRemove = () => {
+    removeWorkspace(
+      {
+        id: workspaceId,
+      },
+      {
+        onSuccess: () => {
+          toast.success("Workspace removed");
+          setEditOpen(false);
+        },
+        onError: () => {
+          toast.error("Failed to remove workspace");
+        },
+      },
+    );
+  };
+
   const handleEdit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     updateWorkspace(
