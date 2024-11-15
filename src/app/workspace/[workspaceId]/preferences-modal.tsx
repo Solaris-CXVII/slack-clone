@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useWorkspaceId } from "@/hooks/use-workspace-id";
 import { toast } from "sonner";
+import { useRouter } from "next/router";
 
 import {
   Dialog,
@@ -31,6 +32,7 @@ export const PreferencesModal = ({
   initialValue,
 }: PreferencesModalProps) => {
   const workspaceId = useWorkspaceId();
+  const router = useRouter();
 
   const [value, setValue] = useState(initialValue);
   const [editOpen, setEditOpen] = useState(false);
@@ -48,7 +50,7 @@ export const PreferencesModal = ({
       {
         onSuccess: () => {
           toast.success("Workspace removed");
-          setEditOpen(false);
+          router.replace("/");
         },
         onError: () => {
           toast.error("Failed to remove workspace");
