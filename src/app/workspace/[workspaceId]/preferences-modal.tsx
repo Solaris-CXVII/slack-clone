@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useWorkspaceId } from "@/hooks/use-workspace-id";
 import { toast } from "sonner";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 import {
   Dialog,
@@ -126,8 +126,8 @@ export const PreferencesModal = ({
           </Dialog>
 
           <button
-            disabled={false}
-            onClick={() => { }}
+            disabled={isRemovingWorkspace}
+            onClick={handleRemove}
             className="flex items-center gap-x-2 px-5 py-4 bg-white rounded-lg border cursor-pointer hover:bg-gray-50 text-rose-600"
           >
             <TrashIcon className="size-4" />
