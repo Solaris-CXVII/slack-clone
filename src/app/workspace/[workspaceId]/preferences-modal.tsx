@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { useWorkspaceId } from "@/hooks/use-workspace-id";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { useConfirm } from "@/hooks/use-confirm";
 
 import {
   Dialog,
@@ -19,7 +20,6 @@ import {
   DialogClose,
   DialogFooter,
 } from "@/components/ui/dialog";
-import { useConfirm } from "@/hooks/use-confirm";
 
 interface PreferencesModalProps {
   open: boolean;
@@ -50,9 +50,7 @@ export const PreferencesModal = ({
   const handleRemove = async () => {
     const ok = await confirm();
 
-    if (!ok) {
-      return;
-    }
+    if (!ok) return;
 
     removeWorkspace(
       {
