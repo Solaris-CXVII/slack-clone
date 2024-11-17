@@ -1,4 +1,6 @@
+import { Hint } from "@/components/hint";
 import { Button } from "@/components/ui/button";
+import { PlusIcon } from "lucide-react";
 import { FaCaretDown } from "react-icons/fa";
 
 interface WorkspaceSectionProps {
@@ -30,6 +32,18 @@ export const WorkspaceSection = ({
         >
           <span className="truncate">{label}</span>
         </Button>
+        {onNew && (
+          <Hint label={hint} side="top" align="center">
+            <Button
+              onClick={onNew}
+              variant="transparent"
+              size="iconSm"
+              className="opacity-0 group-hover:opacity-100 transition-opacity ml-auto p-0.5 text-sm text-[#f9edffcc] size-6 shrink-0"
+            >
+              <PlusIcon className="size-7" />
+            </Button>
+          </Hint>
+        )}
       </div>
       {children}
     </div>
