@@ -46,6 +46,9 @@ export const WorkspaceSection = ({
         )}
       </div>
       {children}
+      {children}
+      {children}
+      {children}
     </div>
   );
 };
