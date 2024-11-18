@@ -4,7 +4,7 @@ import { auth } from "./auth";
 
 import { Id } from "./_generated/dataModel";
 
-const populateUser = (ctx: QueryCtx, Id: Id<"users">) => {
+const populateUser = (ctx: QueryCtx, id: Id<"users">) => {
   return ctx.db.get(id);
 };
 

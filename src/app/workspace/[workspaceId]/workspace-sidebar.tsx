@@ -3,11 +3,10 @@ import {
   HashIcon,
   Loader,
   MessageSquareText,
-  SendHorizonal,
   SendHorizontal,
 } from "lucide-react";
 
-import { UseCurrentMember } from "@/features/auth/members/api/use-current-member";
+import { useCurrentMember } from "@/features/members/api/use-current-member";
 import { useGetWorkspace } from "@/features/workspaces/api/use-get-workspace";
 
 import { useWorkspaceId } from "@/hooks/use-workspace-id";
@@ -16,6 +15,7 @@ import { WorkspaceHeader } from "./workspace-header";
 import { SidebarItem } from "./sidebar-item";
 import { useGetChannels } from "@/features/channels/api/use-get-channels";
 import { WorkspaceSection } from "./workspace-section";
+import { useGetMembers } from "@/features/members/api/use-get-members";
 
 export const WorkspaceSidebar = () => {
   const workspaceId = useWorkspaceId();
@@ -24,11 +24,14 @@ export const WorkspaceSidebar = () => {
     workspaceId,
   });
 
-  const { data: member, isLoading: memberLoading } = UseCurrentMember({
+  const { data: member, isLoading: memberLoading } = useCurrentMember({
     workspaceId,
   });
   const { data: workspace, isLoading: workspaceLoading } = useGetWorkspace({
     id: workspaceId,
+  });
+  const { data: members, isLoading: membersLoading } = useGetMembers({
+    workspaceId,
   });
 
   if (workspaceLoading || memberLoading) {
@@ -68,6 +71,9 @@ export const WorkspaceSidebar = () => {
           />
         ))}
       </WorkspaceSection>
+      {members?.map((item) => {
+        <div>{item.user.name}</div>;
+      })}
     </div>
   );
 };
