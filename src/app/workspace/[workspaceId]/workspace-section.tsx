@@ -2,6 +2,7 @@ import { Hint } from "@/components/hint";
 import { Button } from "@/components/ui/button";
 import { PlusIcon } from "lucide-react";
 import { FaCaretDown } from "react-icons/fa";
+import { useToggle } from "react-use";
 
 interface WorkspaceSectionProps {
   children: React.ReactNode;
