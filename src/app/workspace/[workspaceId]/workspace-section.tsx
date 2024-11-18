@@ -40,14 +40,11 @@ export const WorkspaceSection = ({
               size="iconSm"
               className="opacity-0 group-hover:opacity-100 transition-opacity ml-auto p-0.5 text-sm text-[#f9edffcc] size-6 shrink-0"
             >
-              <PlusIcon className="size-7" />
+              <PlusIcon className="size-5" />
             </Button>
           </Hint>
         )}
       </div>
-      {children}
-      {children}
-      {children}
       {children}
     </div>
   );
