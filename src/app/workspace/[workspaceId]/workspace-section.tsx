@@ -4,6 +4,7 @@ import { PlusIcon } from "lucide-react";
 import { FaCaretDown } from "react-icons/fa";
 import { useToggle } from "react-use";
 
+import { cn } from "@/lib/utils";
 interface WorkspaceSectionProps {
   children: React.ReactNode;
   label: string;
@@ -27,7 +28,9 @@ export const WorkspaceSection = ({
           className="p-0.5 text-sm text-[#f9edffcc] shrink-0 size-6"
           onClick={toggle}
         >
-          <FaCaretDown className="size-4" />
+          <FaCaretDown
+            className={cn("size-4 transition-transform", on && "-rotate-90")}
+          />
         </Button>
         <Button
           variant="transparent"
