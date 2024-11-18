@@ -1,6 +1,12 @@
 import { v } from "convex/values";
-import { query } from "./_generated/server";
+import { query, QueryCtx } from "./_generated/server";
 import { auth } from "./auth";
+
+import { Id } from "./_generated/dataModel";
+
+const populateUser = (ctx: QueryCtx, Id: Id<"users">) => {
+  return ctx.db.get(id);
+};
 
 export const get = query({
   args: {
@@ -32,6 +38,18 @@ export const get = query({
       .collect();
 
     const members = [];
+
+    for (const member of data) {
+      const user = await populateUser(ctx, member.userId);
+
+      if (user) {
+        members.push({
+          ...member,
+          user,
+        });
+      }
+    }
+    return members;
   },
 });
 
