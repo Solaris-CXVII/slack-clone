@@ -11,11 +11,12 @@ const populateUser = (ctx: QueryCtx, id: Id<"users">) => {
 export const get = query({
   args: {
     workspaceId: v.id("workspaces"),
-  },
-  handler: async (ctx, args) => {
-    const userId = await auth.getUserId(ctx);
+    handler: async (ctx, args) => {
+      const userId = await auth.getUserId(ctx);
 
-    if (!userId) {
+    },
+
+    if(!userId) {
       return [];
     }
 
@@ -26,7 +27,7 @@ export const get = query({
       )
       .unique();
 
-    if (!member) {
+    if(!member) {
       return [];
     }
 
@@ -39,7 +40,7 @@ export const get = query({
 
     const members = [];
 
-    for (const member of data) {
+    for(const member of data) {
       const user = await populateUser(ctx, member.userId);
 
       if (user) {
